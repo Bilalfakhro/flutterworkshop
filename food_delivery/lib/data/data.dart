@@ -4,58 +4,49 @@ import 'package:food_delivery/models/order.dart';
 import 'package:food_delivery/models/restaurant.dart';
 import 'package:food_delivery/models/user.dart';
 
-final _burrito =
-    Food(imageUrl: 'assets/images/burrito.jpg', name: 'Burrito', price: 8.99);
-final _steak =
-    Food(imageUrl: 'assets/images/steak.jpg', name: 'Steak', price: 17.99);
-final _pasta =
-    Food(imageUrl: 'assets/images/pasta.jpg', name: 'Pasta', price: 14.99);
-final _ramen =
-    Food(imageUrl: 'assets/images/ramen.jpg', name: 'Ramen', price: 13.99);
-final _pancakes =
-    Food(imageUrl: 'assets/images/pancakes.jpg', name: 'Pancakes', price: 9.99);
-final _burger =
-    Food(imageUrl: 'assets/images/burger.jpg', name: 'Burger', price: 14.99);
-final _pizza =
-    Food(imageUrl: 'assets/images/pizza.jpg', name: 'Pizza', price: 11.99);
-final _salmon = Food(
-    imageUrl: 'assets/images/salmon.jpg', name: 'Salmon Salad', price: 12.99);
-
+final _burrito = Food('assets/images/burrito.jpg', 'Burrito', 8.99);
+final _steak = Food('assets/images/steak.jpg', 'Steak', 17.99);
+final _pasta = Food('assets/images/pasta.jpg', 'Pasta', 14.99);
+final _ramen = Food('assets/images/ramen.jpg', 'Ramen', 13.99);
+final _pancakes = Food('assets/images/pancakes.jpg', 'Pancakes', 9.99);
+final _burger = Food('assets/images/burger.jpg', 'Burger', 14.99);
+final _pizza = Food('assets/images/pizza.jpg', 'Pizza', 11.99);
+final _salmon = Food('assets/images/salmon.jpg', 'Salmon Salad', 12.99);
 // Restaurants
 final _restaurant0 = Restaurant(
-  imageUrl: 'assets/images/restaurant0.jpg',
-  name: 'Restaurant 0',
-  address: '200 Main St, New York, NY',
-  rating: 5,
-  menu: [_burrito, _steak, _pasta, _ramen, _pancakes, _burger, _pizza, _salmon],
+  'assets/images/restaurant0.jpg',
+  'Restaurant 0',
+  '200 Main St, New York, NY',
+  5,
+  [_burrito, _steak, _pasta, _ramen, _pancakes, _burger, _pizza, _salmon],
 );
 final _restaurant1 = Restaurant(
-  imageUrl: 'assets/images/restaurant1.jpg',
-  name: 'Restaurant 1',
-  address: '200 Main St, New York, NY',
-  rating: 4,
-  menu: [_steak, _pasta, _ramen, _pancakes, _burger, _pizza],
+  'assets/images/restaurant1.jpg',
+  'Restaurant 1',
+  '200 Main St, New York, NY',
+  4,
+  [_steak, _pasta, _ramen, _pancakes, _burger, _pizza],
 );
 final _restaurant2 = Restaurant(
-  imageUrl: 'assets/images/restaurant2.jpg',
-  name: 'Restaurant 2',
-  address: '200 Main St, New York, NY',
-  rating: 4,
-  menu: [_steak, _pasta, _pancakes, _burger, _pizza, _salmon],
+  'assets/images/restaurant2.jpg',
+  'Restaurant 2',
+  '200 Main St, New York, NY',
+  4,
+  [_steak, _pasta, _pancakes, _burger, _pizza, _salmon],
 );
 final _restaurant3 = Restaurant(
-  imageUrl: 'assets/images/restaurant3.jpg',
-  name: 'Restaurant 3',
-  address: '200 Main St, New York, NY',
-  rating: 2,
-  menu: [_burrito, _steak, _burger, _pizza, _salmon],
+  'assets/images/restaurant3.jpg',
+  'Restaurant 3',
+  '200 Main St, New York, NY',
+  2,
+  [_burrito, _steak, _burger, _pizza, _salmon],
 );
 final _restaurant4 = Restaurant(
-  imageUrl: 'assets/images/restaurant4.jpg',
-  name: 'Restaurant 4',
-  address: '200 Main St, New York, NY',
-  rating: 3,
-  menu: [_burrito, _ramen, _pancakes, _salmon],
+  'assets/images/restaurant4.jpg',
+  'Restaurant 4',
+  '200 Main St, New York, NY',
+  3,
+  [_burrito, _ramen, _pancakes, _salmon],
 );
 
 final List<Restaurant> restaurants = [
@@ -68,10 +59,9 @@ final List<Restaurant> restaurants = [
 
 // User
 final currentUser = User(
-  profileImageUrl: 'assets/images/user.jpg',
-  isLoggedIn: false,
-  name: 'Sam',
-  orders: [
+  'Sam',
+  'assets/images/user.jpg',
+  [
     Order(
       date: 'Oct 20, 2020',
       food: _steak,
@@ -103,7 +93,7 @@ final currentUser = User(
       quantity: 1,
     ),
   ],
-  cart: [
+  [
     Order(
       date: 'Oct 11, 2020',
       food: _burger,

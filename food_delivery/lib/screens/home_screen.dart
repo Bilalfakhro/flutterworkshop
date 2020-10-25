@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/data/data.dart';
 import 'package:food_delivery/helpers/style.dart';
 import 'package:food_delivery/models/restaurant.dart';
+import 'package:food_delivery/providers/restaurant_provider.dart';
 import 'package:food_delivery/widgets/custom_drawer.dart';
 import 'package:food_delivery/widgets/rating_stars.dart';
 import 'package:food_delivery/widgets/recent_orders.dart';
+import 'package:provider/provider.dart';
 import 'cart_Screen.dart';
 import 'restaurant_screen.dart';
 
@@ -14,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  _buildRestaurants() {
+  _buildRestaurants(List<Restaurant> restaurants) {
     List<Widget> restaurantList = [];
     restaurants.forEach((Restaurant restaurant) {
       restaurantList.add(
@@ -39,11 +41,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
                   child: Hero(
-                    tag: restaurant.imageUrl,
+                    tag: restaurant.id,
                     child: Image(
                       height: 150.0,
                       width: 150.0,
-                      image: AssetImage(restaurant.imageUrl),
+                      image: restaurant.imageUrl != null
+                          ? NetworkImage(restaurant.imageUrl)
+                          : AssetImage('assets/images/restaurant0.jpg'),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -97,6 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final restaurantProvider = Provider.of<RestaurantProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Food Delivery'),
@@ -159,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              _buildRestaurants()
+              _buildRestaurants(restaurantProvider.restaurants)
             ],
           )
         ],

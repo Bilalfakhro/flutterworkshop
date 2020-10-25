@@ -22,7 +22,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
             width: 175,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(menuItem.imageUrl),
+                  image: NetworkImage(menuItem.imageUrl),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(15.0)),
@@ -100,11 +100,11 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
           Stack(
             children: [
               Hero(
-                tag: widget.restaurant.imageUrl,
+                tag: widget.restaurant.id,
                 child: Image(
                   height: 220.0,
                   width: MediaQuery.of(context).size.width,
-                  image: AssetImage(widget.restaurant.imageUrl),
+                  image: NetworkImage(widget.restaurant.imageUrl),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -211,7 +211,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
             child: GridView.count(
               padding: EdgeInsets.all(10.0),
               crossAxisCount: 2,
-              children: List.generate(widget.restaurant.menu.length, (index) {
+              children: List.generate(widget.restaurant.menu?.length, (index) {
                 Food food = widget.restaurant.menu[index];
                 return _buildMenuItem(food);
               }),

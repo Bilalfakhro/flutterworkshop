@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/data/data.dart';
+import 'package:food_delivery/helpers/screen_navigation.dart';
+import 'package:food_delivery/providers/auth_provider.dart';
 import 'package:food_delivery/screens/home_screen.dart';
 import 'package:food_delivery/screens/login_screen.dart';
+import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   _buildDrawerOption(Icon icon, String title, Function onTap) {
@@ -17,6 +20,8 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: true);
+
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -56,7 +61,7 @@ class CustomDrawer extends StatelessWidget {
                       ),
                       SizedBox(width: 6.0),
                       Text(
-                        currentUser.name,
+                        authProvider.userModel.name,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 25.0,
@@ -119,19 +124,32 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: Align(
-            alignment: FractionalOffset.bottomCenter,
-            child: _buildDrawerOption(
-              Icon(currentUser.isLoggedIn ? Icons.directions_run : Icons.login),
-              currentUser.isLoggedIn ? 'Logout' : 'Login',
-              () => Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => LoginScreen(),
-                ),
-              ),
+            child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: authProvider.status == Status.Authenticated
+                  ? _buildDrawerOption(Icon(Icons.directions_run), 'Logout',
+                      () async {
+                      if (!await authProvider.signIn()) {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text("Login failed!"),
+                        ));
+                        return;
+                      }
+                      authProvider.clearController();
+                      navigateToWithReplacement(context, HomeScreen());
+                    })
+                  : _buildDrawerOption(
+                      Icon(Icons.login),
+                      'Login',
+                      () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => LoginScreen(),
+                        ),
+                      ),
+                    ),
             ),
-          ))
+          ),
         ],
       ),
     );
