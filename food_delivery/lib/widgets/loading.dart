@@ -5,7 +5,11 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[CircularProgressIndicator()],
+      children: <Widget>[
+        Center(
+          child: CircularProgressIndicator(),
+        ),
+      ],
     );
   }
 }
